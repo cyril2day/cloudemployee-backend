@@ -7,7 +7,7 @@ const router = express.Router()
 router.get('/plans', function(req, res) {
    Plan.find().sort({ createdAt: -1 })
    .then((result: any) => {
-      res.send(result)
+      res.send({ data: result })
    })
    .catch((err: any) => {
       console.log(err)
