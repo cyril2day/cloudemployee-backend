@@ -5,6 +5,7 @@ const Schema = mongoose.Schema
 export type PlanChild = {
   name: string
   type: string
+  parentId: string
 }
 
 const planChildSchema = new Schema<PlanChild>({
@@ -16,6 +17,10 @@ const planChildSchema = new Schema<PlanChild>({
     type: String,
     required: true
   },
+  parentId: {
+     type: String,
+     required: true
+  }
 }, { timestamps: true })
 
 const PlanChild = mongoose.model('PlanChild', planChildSchema)
