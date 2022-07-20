@@ -1,4 +1,5 @@
 import express from 'express'
+import bodyParser from 'body-parser'
 import morgan from 'morgan'
 import mongoose from 'mongoose'
 import routes from '../routes/api'
@@ -29,7 +30,7 @@ mongoose.connect(dbURI)
  */
 
 app.use(express.static('public'))
-app.use(express.json())
+app.use(bodyParser.json())
 app.use(cors({ origin: true, credentials: false }))
 app.use(morgan('dev'))
 app.use((request, response, next) => {
