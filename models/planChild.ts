@@ -5,7 +5,8 @@ const Schema = mongoose.Schema
 export type PlanChild = {
   name: string
   type: string
-  parentId: string
+  parent: any
+  children?: any[]
 }
 
 const planChildSchema = new Schema<PlanChild>({
@@ -17,10 +18,16 @@ const planChildSchema = new Schema<PlanChild>({
     type: String,
     required: true
   },
-  parentId: {
-     type: String,
-     required: true
-  }
+  parent: {
+     type: Schema.Types.ObjectId,
+     ref: 'Plan'
+  },
+  children: [
+     {
+        type: Schema.Types.ObjectId,
+        ref: 'PlanChild'
+     }
+  ]
 }, { timestamps: true })
 
 const PlanChild = mongoose.model('PlanChild', planChildSchema)

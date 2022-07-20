@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
-const Schema = mongoose.Schema
+import mongoose,{ Schema } from 'mongoose'
+import type { PlanChild } from './planChild'
 
 
 export type Plan = {
@@ -7,25 +7,32 @@ export type Plan = {
   description: string
   type: string
   status: string
+  children?: Array<PlanChild>
 }
 
 const planSchema = new Schema<Plan>({
-  name: {
+   name: {
     type: String,
     required: true,
-  },
-  description: {
+   },
+   description: {
     type: String,
     required: true,
-  },
-  type: {
+   },
+   type: {
     type: String,
     required: true
-  },
-  status: {
+   },
+   status: {
     type: String,
     required: true
-  }
+   },
+   children: [
+     {
+        type: Schema.Types.ObjectId,
+        ref:'PlanChild'
+     }
+   ]
 }, { timestamps: true })
 
 const Plan = mongoose.model('Plan', planSchema)
