@@ -25,9 +25,9 @@ router.get('/plans', planIndex)
 
 router.post('/plans', planCreate)
 
-router.put('/plans/:id', planUpdate)
+router.put('/plan/:id', planUpdate)
 
-router.delete('/plans/:id', planDelete)
+router.delete('/plan/:id', planDelete)
 
 
 /**
