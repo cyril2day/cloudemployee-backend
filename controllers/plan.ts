@@ -10,7 +10,7 @@ export function index(req, res) {
          model: 'PlanChild'
       }
    })
-   .sort({ createdAt: -1 })
+   // .sort({ createdAt: -1 })
    .then(result => {
       res.send(result)
    })
