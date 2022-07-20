@@ -1,6 +1,18 @@
 import express from 'express'
-import Plan from '../models/plan'
-import PlanChild from '../models/planChild'
+
+import {
+   index as planIndex,
+   create as planCreate,
+   update as planUpdate,
+   remove as planDelete
+} from '../controllers/plan'
+
+import {
+   index as planChildIndex,
+   create as planChildCreate,
+   update as planChildUpdate,
+   remove as planChildDelete
+} from '../controllers/planChild'
 
 const router = express.Router()
 
@@ -9,47 +21,26 @@ const router = express.Router()
  * Plan Resource Routes
  */
 
-router.get('/plans', function(req, res) {
-   Plan.find().sort({ createdAt: -1 })
-   .then((result: any) => {
-      console.log(result)
-      res.send(result)
-   })
-   .catch((err: any) => {
-      console.log(err)
-      res.send(err.message)
-   })
-})
+router.get('/plans', planIndex)
 
-router.post('/plans', function(req, res) {
-   console.log(req)
+router.post('/plans', planCreate)
 
-   res.send({ reqParams: req.params })
-})
+router.put('/plans/:id', planUpdate)
+
+router.delete('/plans/:id', planDelete)
 
 
 /**
  * PlanChild Resource Routes
  */
 
-router.get('/plan-children', function(req, res) {
-   PlanChild.find().sort({ createdAt: -1 })
-   .then((result: any) => {
-      console.log(result)
-      res.send(result)
-   })
-   .catch((err: any) => {
-      console.log(err)
-      res.send(err.message)
-   })
-})
+router.get('/plan-children', planChildIndex)
 
-router.post('/plan-children', function(req, res) {
-   console.log(req)
+router.post('/plan-children', planChildCreate)
 
-   res.send({ planChildReqParams: req.params })
-})
+router.put('/plan-children/:id', planChildUpdate)
 
+router.delete('/plan-children/:id', planChildDelete)
 
 
 export default router
